@@ -12,6 +12,7 @@ import {
   useNavigate,
 } from "react-router-dom";
 import { motion } from "motion/react";
+import confetti from "canvas-confetti";
 
 function Home() {
   const [clicks, setClicks] = useState(0);
@@ -445,6 +446,8 @@ function Home() {
 }
 
 function Obrigado() {
+  const [isShaking, setIsShaking] = useState(true);
+
   useEffect(() => {
     // Registra o evento de conversão/venda
     if (typeof window !== "undefined" && (window as any).gtag) {
@@ -455,11 +458,50 @@ function Obrigado() {
         transaction_id: "",
       });
     }
+
+    // Trigger confetti
+    confetti({
+      particleCount: 150,
+      spread: 70,
+      origin: { y: 0.6 },
+      colors: ["#e7a23a", "#8fae86", "#ffffff"],
+    });
+
+    // Stop shaking after animation
+    const timer = setTimeout(() => {
+      setIsShaking(false);
+    }, 1000);
+
+    return () => clearTimeout(timer);
   }, []);
 
   return (
     <div className="obrigado-page">
-      <div className="card">
+      <motion.div
+        className="card"
+        animate={
+          isShaking
+            ? {
+                x: [0, -10, 10, -10, 10, -5, 5, 0],
+                y: [0, 5, -5, 5, -5, 2, -2, 0],
+                rotate: [0, -2, 2, -2, 2, 0],
+                boxShadow: [
+                  "0 40px 80px -20px rgba(0, 0, 0, 0.5)",
+                  "0 0 40px #ff0000",
+                  "0 0 40px #00ff00",
+                  "0 0 40px #0000ff",
+                  "0 40px 80px -20px rgba(0, 0, 0, 0.5)",
+                ],
+              }
+            : {
+                x: 0,
+                y: 0,
+                rotate: 0,
+                boxShadow: "0 40px 80px -20px rgba(0, 0, 0, 0.5)",
+              }
+        }
+        transition={{ duration: 0.8, ease: "easeInOut" }}
+      >
         <div className="check-badge">
           <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
             <path
@@ -491,20 +533,16 @@ function Obrigado() {
             <circle cx="12" cy="16" r="0.9" fill="#8ba394" />
           </svg>
           <span>
-            Clica no botão abaixo para aceder imediatamente aos templates
-            diretamente no Canva.
+            Verifica o teu e-mail para acederes aos teus templates
+            imediatamente.
           </span>
         </div>
 
-        <a href="#" className="btn">
-          Aceder aos meus templates →
-        </a>
-
         <p className="footnote">
-          Guarda este link ou o e-mail de confirmação. Dúvidas?{" "}
-          <a href="#">Fala connosco</a>.
+          Guarda o e-mail de confirmação. Dúvidas? <a href="#">Fala connosco</a>
+          .
         </p>
-      </div>
+      </motion.div>
     </div>
   );
 }
