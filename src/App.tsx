@@ -4,35 +4,38 @@
  */
 
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Routes, Route, Link, useNavigate } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Link,
+  useNavigate,
+} from "react-router-dom";
+import { motion } from "motion/react";
 
 function Home() {
   const [clicks, setClicks] = useState(0);
   const navigate = useNavigate();
 
   const handleLogoClick = () => {
-    setClicks(clicks + 1);
+    const newClicks = clicks + 1;
+    setClicks(newClicks);
+    if (newClicks >= 3) {
+      navigate("/obrigado");
+    }
   };
 
   return (
     <>
       <nav className="nav">
         <div className="wrap">
-          <div 
+          <div
             className="logo font-bold uppercase tracking-widest text-[#e8eee9] cursor-pointer"
             onClick={handleLogoClick}
           >
             NutriTemplates
           </div>
           <div className="flex items-center gap-4">
-            {clicks >= 3 && (
-              <Link 
-                to="/obrigado" 
-                className="text-white text-xs bg-red-600 px-3 py-1 rounded"
-              >
-                Página de Obrigado (Teste)
-              </Link>
-            )}
             <a
               href="https://checkout.transacaoprotegida.com/439a285b-6def-4ab1-906b-e861b6f9690e"
               className="nav-cta"
@@ -46,16 +49,61 @@ function Home() {
         </div>
       </nav>
 
-      <header className="relative w-full bg-[#111a15] flex flex-col items-center pt-8 pb-14">
-        <div className="w-full max-w-5xl mx-auto flex flex-col items-center px-4">
+      <header className="relative w-full bg-[#111a15] flex flex-col items-center pt-8 pb-14 overflow-hidden">
+        <div className="w-full max-w-6xl mx-auto relative flex flex-col items-center px-4">
+          {/* Animated floating words for desktop */}
+          <motion.div
+            className="hidden md:flex absolute left-4 lg:left-12 top-1/4 -rotate-12 bg-[#8fae86]/20 text-[#8fae86] px-4 py-2 rounded-full font-bold text-lg backdrop-blur-sm border border-[#8fae86]/30 z-0 pointer-events-none"
+            animate={{ y: [0, -15, 0] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+          >
+            100% Editável
+          </motion.div>
+          <motion.div
+            className="hidden md:flex absolute right-4 lg:right-12 top-1/3 rotate-12 bg-[#e7a23a]/20 text-[#e7a23a] px-4 py-2 rounded-full font-bold text-lg backdrop-blur-sm border border-[#e7a23a]/30 z-0 pointer-events-none"
+            animate={{ y: [0, 20, 0] }}
+            transition={{
+              duration: 5,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 1,
+            }}
+          >
+            +50 Imagens
+          </motion.div>
+          <motion.div
+            className="hidden md:flex absolute left-8 lg:left-24 bottom-[30%] rotate-6 bg-[#d9e4dd]/10 text-[#d9e4dd] px-4 py-2 rounded-full font-bold text-lg backdrop-blur-sm border border-[#d9e4dd]/20 z-0 pointer-events-none"
+            animate={{ y: [0, -10, 0] }}
+            transition={{
+              duration: 3.5,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 0.5,
+            }}
+          >
+            Posts Prontos
+          </motion.div>
+          <motion.div
+            className="hidden md:flex absolute right-8 lg:right-24 bottom-[20%] -rotate-6 bg-[#8fae86]/20 text-[#8fae86] px-4 py-2 rounded-full font-bold text-lg backdrop-blur-sm border border-[#8fae86]/30 z-0 pointer-events-none"
+            animate={{ y: [0, 15, 0] }}
+            transition={{
+              duration: 4.5,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 1.5,
+            }}
+          >
+            Atraia Pacientes
+          </motion.div>
+
           <img
             src="/assets/Folder_with_food_photos_graphic_202607101508.jpeg"
             alt="Pack Canva para Nutricionistas"
-            className="w-full h-auto max-w-[90%] md:max-w-md lg:max-w-md object-contain block mx-auto rounded-3xl shadow-2xl mb-8"
+            className="w-full h-auto max-w-[85%] md:max-w-sm lg:max-w-md max-h-[50vh] object-contain block mx-auto rounded-3xl shadow-2xl mb-8 relative z-10"
           />
           <a
             href="https://checkout.transacaoprotegida.com/439a285b-6def-4ab1-906b-e861b6f9690e"
-            className="inline-flex items-center justify-center gap-2 bg-[#e7a23a] text-[#132a20] font-bold text-lg md:text-2xl px-8 py-4 md:px-10 md:py-5 rounded-full shadow-2xl hover:scale-105 transition-transform"
+            className="inline-flex items-center justify-center gap-2 bg-[#e7a23a] text-[#132a20] font-bold text-lg md:text-2xl px-8 py-4 md:px-10 md:py-5 rounded-full shadow-2xl hover:scale-105 transition-transform relative z-10"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -401,9 +449,10 @@ function Obrigado() {
     // Registra o evento de conversão/venda
     if (typeof window !== "undefined" && (window as any).gtag) {
       (window as any).gtag("event", "conversion", {
-        send_to: "AW-16952977766", // Se o Google Ads forneceu um label, adicione aqui (ex: AW-16952977766/ABCdef)
-        value: 9.99,
+        send_to: "AW-16952977766/Q_I2CN_2qc4cEObS55M_",
+        value: 1.0,
         currency: "BRL",
+        transaction_id: "",
       });
     }
   }, []);
