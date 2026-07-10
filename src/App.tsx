@@ -3,112 +3,65 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState } from "react";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { BrowserRouter, Routes, Route, Link, useNavigate } from "react-router-dom";
 
 function Home() {
-  const [isDepois, setIsDepois] = useState(false);
+  const [clicks, setClicks] = useState(0);
+  const navigate = useNavigate();
+
+  const handleLogoClick = () => {
+    setClicks(clicks + 1);
+  };
 
   return (
     <>
       <nav className="nav">
         <div className="wrap">
-          <div className="logo">
-            <span className="dot"></span>NutriTemplates
-          </div>
-          <a
-            href="https://checkout.transacaoprotegida.com/439a285b-6def-4ab1-906b-e861b6f9690e"
-            className="nav-cta"
+          <div 
+            className="logo font-bold uppercase tracking-widest text-[#e8eee9] cursor-pointer"
+            onClick={handleLogoClick}
           >
-            Quero por R$ 9,99
-          </a>
+            NutriTemplates
+          </div>
+          <div className="flex items-center gap-4">
+            {clicks >= 3 && (
+              <Link 
+                to="/obrigado" 
+                className="text-white text-xs bg-red-600 px-3 py-1 rounded"
+              >
+                Página de Obrigado (Teste)
+              </Link>
+            )}
+            <a
+              href="https://checkout.transacaoprotegida.com/439a285b-6def-4ab1-906b-e861b6f9690e"
+              className="nav-cta"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span className="hidden sm:inline">Quero por R$ 9,99</span>
+              <span className="sm:hidden">Pegar por R$ 9,99</span>
+            </a>
+          </div>
         </div>
       </nav>
 
-      <header className="hero">
-        <div className="hero-bg">
-          <img src="/assets/hero-marble.jpg" alt="" />
-        </div>
-        <div className="wrap">
-          <div className="hero-copy">
-            <span className="eyebrow">✦ Feito para nutricionistas</span>
-            <h1>
-              Pare de perder horas no Canva. Tenha posts <em>prontos</em> em 5
-              minutos.
-            </h1>
-            <p className="sub">
-              Pack completo de templates 100% editáveis no Canva, feitos para
-              nutricionistas atraírem mais pacientes no Instagram — sem saber
-              nada de design.
-            </p>
-            <div className="hero-actions">
-              <a
-                href="https://checkout.transacaoprotegida.com/439a285b-6def-4ab1-906b-e861b6f9690e"
-                className="btn-primary"
-              >
-                Quero o meu pack agora →
-              </a>
-              <span className="price-tag">
-                De R$ 47 por apenas <strong>R$ 9,99</strong>
-              </span>
-            </div>
-          </div>
-
-          <div className="hero-visual">
-            <div className="phone-mock">
-              <div className="phone-screen">
-                <div className="phone-header">
-                  <div className="phone-avatar"></div>
-                  <div>
-                    <div className="name">seu.consultorio</div>
-                    <div className="handle">Nutricionista</div>
-                  </div>
-                </div>
-                <div className={`grid3 antes ${!isDepois ? "active" : ""}`}>
-                  <div className="cell">foto solta</div>
-                  <div className="cell">print</div>
-                  <div className="cell">sem padrão</div>
-                  <div className="cell">texto ilegível</div>
-                  <div className="cell">cores soltas</div>
-                  <div className="cell">sem marca</div>
-                  <div className="cell">baixa qualidade</div>
-                  <div className="cell">feed confuso</div>
-                  <div className="cell">pouco profissional</div>
-                </div>
-                <div className={`grid3 depois ${isDepois ? "active" : ""}`}>
-                  <div className="cell">Dica do dia</div>
-                  <div className="cell">Receita fit</div>
-                  <div className="cell">Antes / Depois</div>
-                  <div className="cell">Mito ou verdade</div>
-                  <div className="cell">Depoimento</div>
-                  <div className="cell">Agende consulta</div>
-                  <div className="cell">Cardápio</div>
-                  <div className="cell">Benefícios</div>
-                  <div className="cell">Sua marca</div>
-                </div>
-              </div>
-              <div className="toggle-row">
-                <span
-                  className={`toggle-label ${!isDepois ? "on" : ""}`}
-                  id="labelAntes"
-                >
-                  Antes
-                </span>
-                <button
-                  className={`switch ${isDepois ? "is-on" : ""}`}
-                  id="gridSwitch"
-                  aria-label="Alternar entre antes e depois"
-                  onClick={() => setIsDepois(!isDepois)}
-                ></button>
-                <span
-                  className={`toggle-label ${isDepois ? "on" : ""}`}
-                  id="labelDepois"
-                >
-                  Depois
-                </span>
-              </div>
-            </div>
-          </div>
+      <header className="relative w-full bg-[#111a15] flex flex-col items-center pt-8 pb-14">
+        <div className="w-full max-w-5xl mx-auto flex flex-col items-center px-4">
+          <img
+            src="/assets/Folder_with_food_photos_graphic_202607101508.jpeg"
+            alt="Pack Canva para Nutricionistas"
+            className="w-full h-auto max-w-[90%] md:max-w-md lg:max-w-md object-contain block mx-auto rounded-3xl shadow-2xl mb-8"
+          />
+          <a
+            href="https://checkout.transacaoprotegida.com/439a285b-6def-4ab1-906b-e861b6f9690e"
+            className="inline-flex items-center justify-center gap-2 bg-[#e7a23a] text-[#132a20] font-bold text-lg md:text-2xl px-8 py-4 md:px-10 md:py-5 rounded-full shadow-2xl hover:scale-105 transition-transform"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span className="hidden sm:inline">Quero o meu pack agora →</span>
+            <span className="sm:hidden">Pegar por R$ 9,99 →</span>
+          </a>
         </div>
       </header>
 
@@ -245,7 +198,7 @@ function Home() {
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
                   <path
                     d="M4 12l6 6L20 6"
-                    stroke="#FAF6EE"
+                    stroke="#e8eee9"
                     strokeWidth="3"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -261,7 +214,7 @@ function Home() {
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
                   <path
                     d="M4 12l6 6L20 6"
-                    stroke="#FAF6EE"
+                    stroke="#e8eee9"
                     strokeWidth="3"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -275,7 +228,7 @@ function Home() {
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
                   <path
                     d="M4 12l6 6L20 6"
-                    stroke="#FAF6EE"
+                    stroke="#e8eee9"
                     strokeWidth="3"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -291,7 +244,7 @@ function Home() {
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
                   <path
                     d="M4 12l6 6L20 6"
-                    stroke="#FAF6EE"
+                    stroke="#e8eee9"
                     strokeWidth="3"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -305,7 +258,7 @@ function Home() {
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
                   <path
                     d="M4 12l6 6L20 6"
-                    stroke="#FAF6EE"
+                    stroke="#e8eee9"
                     strokeWidth="3"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -319,7 +272,7 @@ function Home() {
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
                   <path
                     d="M4 12l6 6L20 6"
-                    stroke="#FAF6EE"
+                    stroke="#e8eee9"
                     strokeWidth="3"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -341,6 +294,26 @@ function Home() {
               em segundos e tenha um feed irresistível para atrair novos
               pacientes.
             </p>
+            <div className="mt-6 inline-flex items-center gap-3 bg-[#1e3a2e] text-[#e8eee9] px-5 py-4 rounded-xl shadow-lg border border-[#222b27]/50 text-left">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                className="flex-shrink-0 text-[#e7a23a]"
+              >
+                <path
+                  d="M12 4v16m-8-8h16"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                />
+              </svg>
+              <span className="font-medium text-[15px] leading-snug">
+                <strong>E o melhor:</strong> vamos adicionar mais imagens e
+                novos templates editáveis com o tempo, sem custo extra!
+              </span>
+            </div>
           </div>
           <div className="canva-img flex-1 w-full">
             <img
@@ -366,8 +339,13 @@ function Home() {
             <a
               href="https://checkout.transacaoprotegida.com/439a285b-6def-4ab1-906b-e861b6f9690e"
               className="btn-oferta"
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              Quero o meu pack por R$ 9,99
+              <span className="hidden sm:inline">
+                Quero o meu pack por R$ 9,99
+              </span>
+              <span className="sm:hidden">Pegar por R$ 9,99</span>
             </a>
             <p className="microcopy">
               Pagamento seguro · Acesso imediato · Garantia de 7 dias
@@ -383,12 +361,12 @@ function Home() {
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
                 <path
                   d="M12 3l7 3v6c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6l7-3z"
-                  stroke="#1E3A2E"
+                  stroke="#8fae86"
                   strokeWidth="1.6"
                 />
                 <path
                   d="M9 12l2 2 4-4"
-                  stroke="#1E3A2E"
+                  stroke="#8fae86"
                   strokeWidth="1.6"
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -419,6 +397,17 @@ function Home() {
 }
 
 function Obrigado() {
+  useEffect(() => {
+    // Registra o evento de conversão/venda
+    if (typeof window !== "undefined" && (window as any).gtag) {
+      (window as any).gtag("event", "conversion", {
+        send_to: "AW-16952977766", // Se o Google Ads forneceu um label, adicione aqui (ex: AW-16952977766/ABCdef)
+        value: 9.99,
+        currency: "BRL",
+      });
+    }
+  }, []);
+
   return (
     <div className="obrigado-page">
       <div className="card">
@@ -426,7 +415,7 @@ function Obrigado() {
           <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
             <path
               d="M4 12l6 6L20 6"
-              stroke="#1E3A2E"
+              stroke="#8fae86"
               strokeWidth="2.6"
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -443,14 +432,14 @@ function Obrigado() {
 
         <div className="instruction">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-            <circle cx="12" cy="12" r="9" stroke="#544D3F" strokeWidth="1.6" />
+            <circle cx="12" cy="12" r="9" stroke="#8ba394" strokeWidth="1.6" />
             <path
               d="M12 8v5"
-              stroke="#544D3F"
+              stroke="#8ba394"
               strokeWidth="1.6"
               strokeLinecap="round"
             />
-            <circle cx="12" cy="16" r="0.9" fill="#544D3F" />
+            <circle cx="12" cy="16" r="0.9" fill="#8ba394" />
           </svg>
           <span>
             Clica no botão abaixo para aceder imediatamente aos templates
