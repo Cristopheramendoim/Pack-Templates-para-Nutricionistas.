@@ -556,6 +556,66 @@ function Obrigado() {
 }
 
 export default function App() {
+  useEffect(() => {
+    // Animate title
+    let blink = false;
+    const originalTitle =
+      "Pack Canva para Nutricionistas — Posts profissionais em 5 minutos";
+
+    // Animate favicon
+    const canvas = document.createElement("canvas");
+    canvas.width = 32;
+    canvas.height = 32;
+    const ctx = canvas.getContext("2d");
+
+    let link = document.querySelector("link[rel~='icon']") as HTMLLinkElement;
+    if (!link) {
+      link = document.createElement("link");
+      link.rel = "icon";
+      document.head.appendChild(link);
+    }
+
+    let frame = 0;
+    const interval = setInterval(() => {
+      // Toggle title every 10 frames (500ms)
+      if (frame % 10 === 0) {
+        document.title = blink ? `🔴 ${originalTitle}` : originalTitle;
+        blink = !blink;
+      }
+
+      // Draw pulsing favicon
+      if (ctx) {
+        ctx.clearRect(0, 0, 32, 32);
+
+        const cx = 16;
+        const cy = 16;
+
+        // Draw the expanding outer circle (pulse)
+        const maxRadius = 14;
+        const pulseSpeed = 0.5;
+        const radius = (frame * pulseSpeed) % maxRadius;
+        const opacity = Math.max(0, 1 - radius / maxRadius);
+
+        ctx.beginPath();
+        ctx.arc(cx, cy, radius, 0, 2 * Math.PI);
+        ctx.fillStyle = `rgba(220, 38, 38, ${opacity})`;
+        ctx.fill();
+
+        // Draw the solid inner dot
+        ctx.beginPath();
+        ctx.arc(cx, cy, 6, 0, 2 * Math.PI);
+        ctx.fillStyle = "rgba(220, 38, 38, 1)";
+        ctx.fill();
+
+        link.href = canvas.toDataURL("image/png");
+      }
+
+      frame++;
+    }, 50);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <BrowserRouter>
       <Routes>
