@@ -871,6 +871,31 @@ footer p {
   transform: translateY(-2px);
 }
 
+.obrigado-page .btn-red {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: #dc2626;
+  color: white;
+  font-weight: 700;
+  font-size: 16.5px;
+  padding: 18px 24px;
+  border-radius: 100px;
+  box-shadow: 0 12px 28px rgba(220, 38, 38, 0.35);
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.18s ease;
+  margin-top: 16px;
+}
+
+.obrigado-page .btn-red:hover {
+  transform: translateY(-2px);
+  background: #b91c1c;
+}
+
 .obrigado-page .footnote {
   margin-top: 22px;
   font-size: 12.5px;

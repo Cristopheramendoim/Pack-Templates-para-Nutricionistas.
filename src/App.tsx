@@ -538,6 +538,14 @@ function Obrigado() {
           </span>
         </div>
 
+        <a
+          href="https://mail.google.com/mail/?view=cm&fs=1&to=renanpereira.info@gmail.com&su=N%C3%A3o%20recebi"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn-red"
+        >
+          Não recebi
+        </a>
         <p className="footnote">
           Guarda o e-mail de confirmação. Dúvidas? <a href="#">Fala connosco</a>
           .
