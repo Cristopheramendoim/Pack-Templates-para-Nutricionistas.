@@ -202,7 +202,7 @@ function Home() {
         <div className="wrap">
           <div className="solucao-img">
             <img
-              src="/assets/nutricionista.jpg"
+              src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=1470"
               alt="Nutricionista sorrindo, segurando tablet com gráficos de conteúdo"
             />
             <div className="solucao-badge">
