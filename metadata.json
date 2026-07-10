@@ -1,0 +1,6 @@
+{
+  "name": "Pack Canva para Nutricionistas",
+  "description": "Template de página de vendas de alta conversão para nutricionistas.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
